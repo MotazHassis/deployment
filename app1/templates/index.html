@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index_style.css' %}">
+</head>
+<body>
+    <div class="main">
+        <div class="left">
+            <form action="/registration" method="post">
+                {% csrf_token %}
+                <h2>Registration</h2>
+                <div class="left_container">
+                    <div class="left-left">
+                        <p>First Name</p>
+                        <p>Last Name</p>
+                        <p>Email</p>
+                        <p>Password</p>
+                        <p>Confirm PW</p>
+                    </div>
+                    <div class="left-right">
+                        <input type="text" name="fname">
+                        <input type="text" name="lname">
+                        <input type="text" name="email">
+                        <input type="password" name="password">
+                        <input type="password" name="confirm">
+                    </div>
+                </div>
+                <input type="submit" value="Register">
+            </form>
+        </div>
+        <div class="right">
+            <form action="/login" method="post">
+                {% csrf_token %}
+                <h2>Login</h2>
+                <div class="right_container">
+                    <div class="right-left">
+                        <p>Email</p>
+                        <p>Password</p>
+                    </div>
+                    <div class="right-right">
+                        <input type="text" name="lemail">
+                        <input type="password" name="lpassword">
+                    </div>
+                </div>
+                <input type="submit" value="Log In">
+            </form>             
+        </div>
+    </div>
+    <div class="messages">
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li style="color: brown;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
